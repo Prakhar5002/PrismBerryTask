@@ -50,12 +50,6 @@ const Bicycle = ({ navigation }) => {
     setData(newData);
   };
 
-  const renderHomeOptions = ({ item, index }) => (
-    <Pressable>
-      <Image style={[styles.optionIcon]} source={item.source} />
-    </Pressable>
-  );
-
   const headerComponent = (
     <View>
       <View style={styles.header}>
@@ -82,19 +76,13 @@ const Bicycle = ({ navigation }) => {
         />
         <Text style={styles.itemDiscount}>30% Off</Text>
       </ImageBackground>
-      <FlatList
-        data={homeOptions}
-        horizontal
-        contentContainerStyle={{
-          flexDirection: 'row',
-          justifyContent: 'space-evenly',
-          alignItems: 'center',
-          flex: 1,
-          paddingBottom: 20,
-        }}
-        keyExtractor={(item) => item.id}
-        renderItem={renderHomeOptions}
-      />
+      <View style={[globalStyles.row, {justifyContent: 'space-evenly'}]}>
+      {homeOptions.map((option, index) => (
+        <Pressable key={option.id} style={{ top: -index * 14, zIndex: 5 }}>
+          <Image style={[styles.optionIcon]} source={option.source} />
+        </Pressable>
+      ))}
+      </View>
     </View>
   );
 

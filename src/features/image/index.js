@@ -10,10 +10,21 @@ import {
 import React from 'react';
 import images from '@app/assets/images';
 import colors from '@app/styles/colors';
+import { useFocusEffect } from '@react-navigation/native';
+import changeNavigationBarColor, { showNavigationBar } from 'react-native-navigation-bar-color';
 
 const windowWidth = Dimensions.get('window').width;
 
 const FullImage = ({ route, navigation }) => {
+  useFocusEffect(() => {
+    try {
+      showNavigationBar();
+      changeNavigationBarColor('#353F54', true);
+    } catch (e) {
+      console.log(e); // {success: false}
+    }
+  })
+
   const { desc, source } = route.params;
   return (
     <View style={styles.container}>

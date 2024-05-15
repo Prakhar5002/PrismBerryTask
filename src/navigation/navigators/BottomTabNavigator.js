@@ -4,10 +4,22 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BOTTOM_TAB_CONFIG } from '@app/configs';
 import colors from '@app/styles/colors';
 import images from '@app/assets/images';
+import { useFocusEffect } from '@react-navigation/native';
+import changeNavigationBarColor, { showNavigationBar } from 'react-native-navigation-bar-color';
 
 const Tab = createBottomTabNavigator();
 
 const BottomTabStack = () => {
+
+  useFocusEffect(() => {
+    try {
+      showNavigationBar();
+      changeNavigationBarColor(colors.lightBlue, true);
+    } catch (e) {
+      console.log(e); // {success: false}
+    }
+  })
+
   function MyTabBar({ state, descriptors, navigation }) {
     return (
       <View style={{ flexDirection: 'row' }}>
